@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solitaire</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="game-container">
+    <div id="header">
+      <h1>♠ Solitaire ♥</h1>
+      <div id="controls">
+        <button id="new-game">New Game</button>
+        <div id="timer">Time: 0:00</div>
+        <div id="moves">Moves: 0</div>
+      </div>
+    </div>
+    
+    <div id="game-board">
+      <div id="top-row">
+        <div id="stock-pile" class="pile"></div>
+        <div id="waste-pile" class="pile"></div>
+        <div class="spacer"></div>
+        <div id="foundation-0" class="foundation pile" data-suit="hearts"></div>
+        <div id="foundation-1" class="foundation pile" data-suit="diamonds"></div>
+        <div id="foundation-2" class="foundation pile" data-suit="clubs"></div>
+        <div id="foundation-3" class="foundation pile" data-suit="spades"></div>
+      </div>
+      
+      <div id="tableau">
+        <div id="tableau-0" class="tableau-pile pile"></div>
+        <div id="tableau-1" class="tableau-pile pile"></div>
+        <div id="tableau-2" class="tableau-pile pile"></div>
+        <div id="tableau-3" class="tableau-pile pile"></div>
+        <div id="tableau-4" class="tableau-pile pile"></div>
+        <div id="tableau-5" class="tableau-pile pile"></div>
+        <div id="tableau-6" class="tableau-pile pile"></div>
+      </div>
+    </div>
+    
+    <div id="win-message" class="hidden">
+      <h2>🎉 You Won! 🎉</h2>
+      <p>Time: <span id="final-time">0:00</span></p>
+      <p>Moves: <span id="final-moves">0</span></p>
+      <button id="play-again">Play Again</button>
+    </div>
+  </div>
+  
+  <a class="back-btn" href="../index.html">Back to Menu</a>
+  <script src="script.js"></script>
+</body>
+</html>

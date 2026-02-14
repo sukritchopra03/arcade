@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D Racing</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="game-container">
+    <div id="score">Score: 0</div>
+    <div id="speed">Speed: 0</div>
+    <div id="game-over" class="hidden">
+      <h2>Game Over!</h2>
+      <p>Final Score: <span id="final-score">0</span></p>
+      <button id="restart-btn">Restart</button>
+    </div>
+    <div id="instructions">
+      <p>Use ARROW KEYS or A/D to steer</p>
+      <p>Press SPACE to start</p>
+    </div>
+  </div>
+  <a class="back-btn" href="../index.html">Back to Menu</a>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

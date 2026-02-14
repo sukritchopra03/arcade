@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Temple Runner 3D</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="game-container">
+    <!-- MAIN MENU -->
+    <div id="main-menu">
+      <h1>Temple Runner 3D</h1>
+      <p class="subtitle">Run, jump, slide and survive the jungle temple.</p>
+      <button id="play-btn">Play</button>
+      <div class="tips">
+        <p><strong>Controls</strong></p>
+        <p>← / → : Switch lanes</p>
+        <p>↑ : Jump</p>
+        <p>↓ : Slide</p>
+        <p>SPACE / ENTER : Start or Restart</p>
+      </div>
+    </div>
+
+    <!-- HUD -->
+    <div id="hud">
+      <div id="score">Score: 0</div>
+      <div id="coins">Coins: 0</div>
+      <div id="multiplier">x1</div>
+      <div id="mode-indicator">RUN</div>
+    </div>
+
+    <!-- In‑game instructions (overlay at first run) -->
+    <div id="instructions">
+      <h3>Temple Runner</h3>
+      <p>Use ← / → to switch lanes</p>
+      <p>Press ↑ to jump, ↓ to slide</p>
+      <p>SPACE or ENTER to start</p>
+      <p class="info">
+        Avoid obstacles, jump over pits, slide under traps, and collect coins.
+        Power-ups:
+        <br>Shield = temporary invincibility
+        <br>Magnet = pulls coins toward you
+      </p>
+    </div>
+
+    <!-- GAME OVER -->
+    <div id="game-over" class="hidden">
+      <h2>Game Over!</h2>
+      <p>Score: <span id="final-score">0</span></p>
+      <p>Coins: <span id="final-coins">0</span></p>
+      <p>Best: <span id="best-score">0</span></p>
+      <button id="restart-btn">Restart</button>
+    </div>
+  </div>
+
+  <a class="back-btn" href="../index.html">Back to Menu</a>
+
+  <script src="https://cdn.jsdelivr.net/npm/three@0.152.0/build/three.min.js" crossorigin="anonymous"></script>
+  <script>
+    // Wait for Three.js to load before starting the game
+    window.addEventListener('load', function() {
+      if (typeof THREE === 'undefined') {
+        console.error('Three.js failed to load. Please check your internet connection.');
+        document.getElementById('game-container').innerHTML = '<div style="color: white; text-align: center; padding: 50px;">Failed to load 3D library. Please refresh the page.</div>';
+      }
+    });
+  </script>
+  <script defer src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stickman Fighter</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="game-container">
+    <canvas id="gameCanvas"></canvas>
+    <div id="hud">
+      <div class="health-bar">
+        <div class="label">Player HP</div>
+        <div class="bar">
+          <div id="player-health" class="health"></div>
+        </div>
+      </div>
+      <div id="score">Score: 0</div>
+      <div class="health-bar">
+        <div class="label">Enemy HP</div>
+        <div class="bar">
+          <div id="enemy-health" class="health"></div>
+        </div>
+      </div>
+    </div>
+    <div id="game-over" class="hidden">
+      <h2 id="game-over-title">Game Over!</h2>
+      <p>Score: <span id="final-score">0</span></p>
+      <button id="restart-btn">Restart</button>
+    </div>
+    <div id="instructions">
+      <h3>Stickman Fighter</h3>
+      <p>A/D - Move Left/Right</p>
+      <p>W - Jump</p>
+      <p>J - Punch</p>
+      <p>K - Kick</p>
+      <p>Press SPACE to start</p>
+    </div>
+  </div>
+  <a class="back-btn" href="../index.html">Back to Menu</a>
+  <script src="script.js"></script>
+</body>
+</html>

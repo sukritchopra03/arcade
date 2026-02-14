@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Breakout</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="game-container">
+    <canvas id="gameCanvas"></canvas>
+    <div id="hud">
+      <div id="score">Score: 0</div>
+      <div id="lives">Lives: ❤️❤️❤️</div>
+      <div id="level">Level: 1</div>
+    </div>
+    <div id="game-over" class="hidden">
+      <h2 id="game-over-title">Game Over!</h2>
+      <p>Final Score: <span id="final-score">0</span></p>
+      <p>Level Reached: <span id="final-level">1</span></p>
+      <button id="restart-btn">Restart</button>
+    </div>
+    <div id="instructions">
+      <h3>Breakout</h3>
+      <p>Move paddle with MOUSE or ARROW KEYS</p>
+      <p>Break all the bricks!</p>
+      <p>Press SPACE to start</p>
+    </div>
+  </div>
+  <a class="back-btn" href="../index.html">Back to Menu</a>
+  <script src="script.js"></script>
+</body>
+</html>
