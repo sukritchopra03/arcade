@@ -24,6 +24,16 @@ const Wordle = lazy(() => import('./pages/Wordle'));
 const ConnectFour = lazy(() => import('./pages/ConnectFour'));
 const Sudoku = lazy(() => import('./pages/Sudoku'));
 const MemoryMatch = lazy(() => import('./pages/MemoryMatch'));
+const Tetris = lazy(() => import('./pages/Tetris'));
+const SpaceInvaders = lazy(() => import('./pages/SpaceInvaders'));
+const Hangman = lazy(() => import('./pages/Hangman'));
+const TypingTest = lazy(() => import('./pages/TypingTest'));
+const WhackAMole = lazy(() => import('./pages/WhackAMole'));
+const SimonSays = lazy(() => import('./pages/SimonSays'));
+const TowerOfHanoi = lazy(() => import('./pages/TowerOfHanoi'));
+const Reversi = lazy(() => import('./pages/Reversi'));
+const DoodleJump = lazy(() => import('./pages/DoodleJump'));
+const ReactionTest = lazy(() => import('./pages/ReactionTest'));
 
 function Loader() {
   return (
@@ -60,6 +70,16 @@ export default function App() {
         <Route path="/connectfour" element={<ConnectFour />} />
         <Route path="/sudoku" element={<Sudoku />} />
         <Route path="/memorymatch" element={<MemoryMatch />} />
+        <Route path="/tetris" element={<Tetris />} />
+        <Route path="/spaceinvaders" element={<SpaceInvaders />} />
+        <Route path="/hangman" element={<Hangman />} />
+        <Route path="/typingtest" element={<TypingTest />} />
+        <Route path="/whackamole" element={<WhackAMole />} />
+        <Route path="/simonsays" element={<SimonSays />} />
+        <Route path="/towerofhanoi" element={<TowerOfHanoi />} />
+        <Route path="/reversi" element={<Reversi />} />
+        <Route path="/doodlejump" element={<DoodleJump />} />
+        <Route path="/reactiontest" element={<ReactionTest />} />
       </Routes>
     </Suspense>
   );

@@ -13,7 +13,7 @@ const games = [
   { path: '/solitaire', icon: '♠️', title: 'Solitaire', desc: 'Classic card game', color: '#448aff' },
   { path: '/flappybird', icon: '🐦', title: 'Flappy Bird', desc: 'Tap to flap and survive', color: '#F4D03F' },
   { path: '/breakout', icon: '🧱', title: 'Breakout', desc: 'Break bricks with the ball', color: '#ff6e40' },
-  { path: '/chess', icon: '♟️', title: 'Chess', desc: 'Play chess vs adjustable AI', color: '#ffd740' },
+  { path: '/chess', icon: '♟️', title: 'Chess', desc: 'AI or Online Multiplayer', color: '#ffd740' },
   { path: '/teenpatti', icon: '🃏', title: 'Teen Patti', desc: '3-card Indian poker vs AI', color: '#e91e63' },
   { path: '/rummy', icon: '🂡', title: 'Rummy', desc: 'Gin Rummy card game', color: '#4caf50' },
   { path: '/gofish', icon: '🐟', title: 'Go Fish', desc: 'Classic card matching game', color: '#29b6f6' },
@@ -24,6 +24,16 @@ const games = [
   { path: '/connectfour', icon: '🔴', title: 'Connect Four', desc: 'Drop discs, connect 4 to win', color: '#1565c0' },
   { path: '/sudoku', icon: '🔢', title: 'Sudoku', desc: '9×9 number puzzle', color: '#90caf9' },
   { path: '/memorymatch', icon: '🧠', title: 'Memory Match', desc: 'Flip & match emoji pairs', color: '#f48fb1' },
+  { path: '/tetris', icon: '🧩', title: 'Tetris', desc: 'Classic falling blocks', color: '#00e5ff' },
+  { path: '/spaceinvaders', icon: '👾', title: 'Space Invaders', desc: 'Shoot waves of aliens', color: '#69f0ae' },
+  { path: '/hangman', icon: '🪢', title: 'Hangman', desc: 'Guess the hidden word', color: '#ffd740' },
+  { path: '/typingtest', icon: '⌨️', title: 'Typing Test', desc: 'Test your typing speed', color: '#00e5ff' },
+  { path: '/whackamole', icon: '🔨', title: 'Whack-a-Mole', desc: 'Click the moles fast!', color: '#ff6e40' },
+  { path: '/simonsays', icon: '🔴', title: 'Simon Says', desc: 'Color sequence memory', color: '#ce93d8' },
+  { path: '/towerofhanoi', icon: '🗼', title: 'Tower of Hanoi', desc: 'Classic disk puzzle', color: '#ffd740' },
+  { path: '/reversi', icon: '⚫', title: 'Reversi', desc: 'Othello board game vs AI', color: '#69f0ae' },
+  { path: '/doodlejump', icon: '🦘', title: 'Doodle Jump', desc: 'Endless vertical platformer', color: '#b9f6ca' },
+  { path: '/reactiontest', icon: '⚡', title: 'Reaction Time', desc: 'Test your reflexes', color: '#ffd740' },
 ];
 
 export default function MainMenu() {
