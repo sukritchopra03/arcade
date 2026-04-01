@@ -58,11 +58,11 @@ export default function MainMenu() {
       particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        r: Math.random() * 2 + 0.5,
+        r: Math.random() * 80 + 0.5,
         dx: (Math.random() - 0.5) * 0.4,
         dy: (Math.random() - 0.5) * 0.4,
         alpha: Math.random() * 0.5 + 0.2,
-        hue: Math.random() * 60 + 180,
+        hue: Math.random() * 180 + 180,
       });
     }
 

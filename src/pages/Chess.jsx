@@ -42,6 +42,23 @@ function initialBoard() {
   return [BR,BN,BB,BQ,BK,BB,BN,BR,BP,BP,BP,BP,BP,BP,BP,BP,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,WP,WP,WP,WP,WP,WP,WP,WP,WR,WN,WB,WQ,WK,WB,WN,WR];
 }
 function initialCastle() { return { wk: true, wq: true, bk: true, bq: true }; }
+function buildSnapshot(board, castle, enPassant, turn, lastMove, moveHistory, capturedByW, capturedByB, status) {
+  return {
+    board: [...board],
+    castle: { ...castle },
+    enPassant,
+    turn,
+    lastMove: lastMove ? { ...lastMove } : null,
+    moveHistory: [...moveHistory],
+    capturedByW: [...capturedByW],
+    capturedByB: [...capturedByB],
+    status,
+  };
+}
+function initialSnapshot() {
+  const board = initialBoard();
+  return buildSnapshot(board, initialCastle(), -1, 'w', null, [], [], [], 'playing');
+}
 
 /* ─── move generation ────────────────────────────────────── */
 const rc = (i) => [Math.floor(i / 8), i % 8];
@@ -271,7 +288,7 @@ export default function Chess() {
   const [lastMove, setLastMove] = useState(null);
   const [moveHistory, setMoveHistory] = useState([]);
   const [promoSquare, setPromoSquare] = useState(null);
-  const [history, setHistory] = useState([{ board: initialBoard(), lastMove: null }]);
+  const [history, setHistory] = useState(() => [initialSnapshot()]);
   const [viewIdx, setViewIdx] = useState(0);
 
   /* player */
@@ -308,25 +325,36 @@ export default function Chess() {
   /* ─── reset ─── */
   const resetGame = useCallback((color) => {
     const c = color || playerColor;
+    const freshBoard = initialBoard();
+    const freshCastle = initialCastle();
     setPlayerColor(c);
-    setBoard(initialBoard()); setCastle(initialCastle()); setEnPassant(-1); setTurn('w');
+    setBoard(freshBoard); setCastle(freshCastle); setEnPassant(-1); setTurn('w');
     setSelected(null); setLegalForSelected([]); setStatus('playing');
     setCapturedByW([]); setCapturedByB([]);
     setLastMove(null); setMoveHistory([]); setPromoSquare(null);
-    setHistory([{ board: initialBoard(), lastMove: null }]); setViewIdx(0);
+    setHistory([buildSnapshot(freshBoard, freshCastle, -1, 'w', null, [], [], [], 'playing')]); setViewIdx(0);
     setThinking(false); setAnim(null); thinkingRef.current = false;
-    boardRef.current = initialBoard(); castleRef.current = initialCastle(); epRef.current = -1; turnRef.current = 'w';
+    boardRef.current = [...freshBoard]; castleRef.current = { ...freshCastle }; epRef.current = -1; turnRef.current = 'w';
   }, [playerColor]);
 
   /* ─── apply move (shared by AI, human, and online) ─── */
   const applyMove = useCallback((b, c, ep, move) => {
     const t = colorOf(b[move.from]) || turn;
     const captured = b[move.to];
+    const newCapturedByW = [...capturedByW];
+    const newCapturedByB = [...capturedByB];
     const { board: nb, castle: nc, enPassant: nep } = makeMove(b, c, ep, move);
     const nextTurn = t === 'w' ? 'b' : 'w';
 
-    if (captured !== EMPTY) { (t === 'w' ? setCapturedByW : setCapturedByB)(prev => [...prev, captured]); }
-    if (move.ep) { const epP = t === 'w' ? BP : WP; (t === 'w' ? setCapturedByW : setCapturedByB)(prev => [...prev, epP]); }
+    if (captured !== EMPTY) {
+      if (t === 'w') newCapturedByW.push(captured);
+      else newCapturedByB.push(captured);
+    }
+    if (move.ep) {
+      const epP = t === 'w' ? BP : WP;
+      if (t === 'w') newCapturedByW.push(epP);
+      else newCapturedByB.push(epP);
+    }
 
     /* animation data */
     const a = { movedFrom: move.from, movedTo: move.to };
@@ -341,19 +369,21 @@ export default function Chess() {
     setTimeout(() => setAnim(null), ANIM_MS + 80);
 
     setBoard(nb); setCastle(nc); setEnPassant(nep); setTurn(nextTurn);
+    setCapturedByW(newCapturedByW); setCapturedByB(newCapturedByB);
     setSelected(null); setLegalForSelected([]);
     boardRef.current = nb; castleRef.current = nc; epRef.current = nep; turnRef.current = nextTurn;
 
     const newLast = { from: move.from, to: move.to };
+    const newMoveHistory = [...moveHistory, move];
     setLastMove(newLast);
-    setMoveHistory(prev => [...prev, move]);
-    setHistory(prev => [...prev, { board: [...nb], lastMove: newLast }]);
+    setMoveHistory(newMoveHistory);
     setViewIdx(prev => prev + 1);
 
     const nl = legalMoves(nb, nextTurn, nc, nep);
-    if (!nl.length) setStatus(isInCheck(nb, nextTurn) ? 'checkmate' : 'stalemate');
-    else setStatus(isInCheck(nb, nextTurn) ? 'check' : 'playing');
-  }, [turn]);
+    const nextStatus = !nl.length ? (isInCheck(nb, nextTurn) ? 'checkmate' : 'stalemate') : (isInCheck(nb, nextTurn) ? 'check' : 'playing');
+    setStatus(nextStatus);
+    setHistory(prev => [...prev, buildSnapshot(nb, nc, nep, nextTurn, newLast, newMoveHistory, newCapturedByW, newCapturedByB, nextStatus)]);
+  }, [turn, moveHistory, capturedByW, capturedByB]);
 
   const applyMoveRef = useRef(applyMove);
   applyMoveRef.current = applyMove;
@@ -386,12 +416,14 @@ export default function Chess() {
       if (data.type === 'move') { applyMoveRef.current(boardRef.current, castleRef.current, epRef.current, data.move); }
       if (data.type === 'resign') { setStatus('opponent_resigned'); }
       if (data.type === 'rematch') {
-        setBoard(initialBoard()); setCastle(initialCastle()); setEnPassant(-1); setTurn('w');
+        const freshBoard = initialBoard();
+        const freshCastle = initialCastle();
+        setBoard(freshBoard); setCastle(freshCastle); setEnPassant(-1); setTurn('w');
         setSelected(null); setLegalForSelected([]); setStatus('playing');
         setCapturedByW([]); setCapturedByB([]); setLastMove(null); setMoveHistory([]);
-        setPromoSquare(null); setHistory([{ board: initialBoard(), lastMove: null }]); setViewIdx(0);
+        setPromoSquare(null); setHistory([buildSnapshot(freshBoard, freshCastle, -1, 'w', null, [], [], [], 'playing')]); setViewIdx(0);
         setAnim(null);
-        boardRef.current = initialBoard(); castleRef.current = initialCastle(); epRef.current = -1; turnRef.current = 'w';
+        boardRef.current = [...freshBoard]; castleRef.current = { ...freshCastle }; epRef.current = -1; turnRef.current = 'w';
       }
     });
     conn.on('close', () => { setOppDisconnected(true); setConnected(false); });
@@ -438,6 +470,48 @@ export default function Chess() {
   const goBack = () => setViewIdx(v => Math.max(0, v - 1));
   const goForward = () => setViewIdx(v => Math.min(history.length - 1, v + 1));
   const goToLatest = () => setViewIdx(history.length - 1);
+  const openHistoryFromGameOver = () => {
+    if (history.length > 1) setViewIdx(history.length - 2);
+  };
+  const setCurrentToViewedMove = useCallback(() => {
+    const snap = history[viewIdx];
+    if (!snap) return;
+
+    const trimmedHistory = history.slice(0, viewIdx + 1).map(h => buildSnapshot(
+      h.board,
+      h.castle,
+      h.enPassant,
+      h.turn,
+      h.lastMove,
+      h.moveHistory,
+      h.capturedByW,
+      h.capturedByB,
+      h.status,
+    ));
+
+    setBoard([...snap.board]);
+    setCastle({ ...snap.castle });
+    setEnPassant(snap.enPassant);
+    setTurn(snap.turn);
+    setSelected(null);
+    setLegalForSelected([]);
+    setStatus(snap.status);
+    setCapturedByW([...snap.capturedByW]);
+    setCapturedByB([...snap.capturedByB]);
+    setLastMove(snap.lastMove ? { ...snap.lastMove } : null);
+    setMoveHistory([...snap.moveHistory]);
+    setPromoSquare(null);
+    setAnim(null);
+    setThinking(false);
+    thinkingRef.current = false;
+    setHistory(trimmedHistory);
+    setViewIdx(trimmedHistory.length - 1);
+
+    boardRef.current = [...snap.board];
+    castleRef.current = { ...snap.castle };
+    epRef.current = snap.enPassant;
+    turnRef.current = snap.turn;
+  }, [history, viewIdx]);
 
   /* ─── click handler ─── */
   const handleSquareClick = (i) => {
@@ -553,7 +627,9 @@ export default function Chess() {
   /* ─── RENDER: game ─── */
   const displayBoard = isViewingHistory ? history[viewIdx].board : board;
   const displayLastMove = isViewingHistory ? history[viewIdx].lastMove : lastMove;
-  const gameOver = status === 'checkmate' || status === 'stalemate' || status === 'opponent_resigned' || status === 'you_resigned';
+  const displayTurn = isViewingHistory ? history[viewIdx].turn : turn;
+  const displayStatus = isViewingHistory ? history[viewIdx].status : status;
+  const gameOver = (status === 'checkmate' || status === 'stalemate' || status === 'opponent_resigned' || status === 'you_resigned') && !isViewingHistory;
 
   let statusText = null;
   if (status === 'check') statusText = <span className="chess-check">Check!</span>;
@@ -615,9 +691,13 @@ export default function Chess() {
 
         <div className="chess-history-nav">
           <button onClick={goBack} disabled={viewIdx === 0}>◀</button>
+          <select className="chess-history-select" value={viewIdx} onChange={(e) => setViewIdx(Number(e.target.value))}>
+            {history.map((_, i) => <option key={i} value={i}>Move {i}</option>)}
+          </select>
           <span>{viewIdx} / {history.length - 1}</span>
           <button onClick={goForward} disabled={viewIdx >= history.length - 1}>▶</button>
           {isViewingHistory && <button className="chess-go-live" onClick={goToLatest}>Live</button>}
+          <button className="chess-set-state" onClick={setCurrentToViewedMove} disabled={!isViewingHistory}>Use This Move</button>
         </div>
 
         {mode === 'online' && !gameOver && connected && (
@@ -639,7 +719,7 @@ export default function Chess() {
             const isSel = selected === li;
             const isLF = displayLastMove?.from === li;
             const isLT = displayLastMove?.to === li;
-            const inChk = (status === 'check' || status === 'checkmate') && ((piece === WK && turn === 'w') || (piece === BK && turn === 'b'));
+            const inChk = (displayStatus === 'check' || displayStatus === 'checkmate') && ((piece === WK && displayTurn === 'w') || (piece === BK && displayTurn === 'b'));
             const rl = playerColor === 'w' ? 8 - dr : dr + 1;
             const fl = playerColor === 'w' ? 'abcdefgh'[dc2] : 'abcdefgh'[7 - dc2];
 
@@ -694,6 +774,7 @@ export default function Chess() {
         <div className="chess-game-over">
           <h2>{status === 'checkmate' ? (turn === playerColor ? '♚ You Lost' : '♔ You Win!') : status === 'stalemate' ? '½ Draw' : status === 'opponent_resigned' ? '♔ You Win!' : '♚ You Resigned'}</h2>
           <p>{status === 'checkmate' ? 'Checkmate' : status === 'stalemate' ? 'Stalemate' : 'Resignation'}</p>
+          {history.length > 1 && <button onClick={openHistoryFromGameOver}>Browse History</button>}
           {mode === 'ai' && <button onClick={() => resetGame()}>Play Again</button>}
           {mode === 'online' && connected && <button onClick={sendRematch}>Rematch</button>}
           <button onClick={() => { cleanupPeer(); setMode(null); }}>Main Menu</button>

@@ -172,9 +172,9 @@
 
 /* ─── Sidebar ─── */
 .chess-sidebar {
-  width: 260px;
+  width: 360px;
   min-width: 260px;
-  max-width: 260px;
+  /* max-width: 260px; */
   flex-shrink: 0;
   padding: 24px 18px;
   display: flex;
@@ -284,6 +284,16 @@
 }
 .chess-history-nav button:disabled { opacity: .3; cursor: default; }
 .chess-history-nav button:hover:not(:disabled) { border-color: #90caf9; color: #90caf9; }
+.chess-history-select {
+  padding: 4px 8px;
+  border: 1px solid #334;
+  border-radius: 6px;
+  background: #161b2e;
+  color: #ccc;
+  font-size: .8rem;
+  outline: none;
+}
+.chess-history-select:focus { border-color: #90caf9; }
 .chess-go-live {
   padding: 3px 10px !important;
   font-size: .75rem !important;
@@ -291,6 +301,16 @@
   color: #000 !important;
   border-color: #69f0ae !important;
   font-weight: 700;
+}
+.chess-set-state {
+  padding: 3px 10px !important;
+  font-size: .75rem !important;
+  border-color: #ffd740 !important;
+  color: #ffd740 !important;
+}
+.chess-set-state:hover {
+  background: #ffd74022;
+  color: #ffd740 !important;
 }
 
 .chess-resign-btn {
