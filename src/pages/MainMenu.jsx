@@ -34,6 +34,21 @@ const games = [
   { path: '/reversi', icon: '⚫', title: 'Reversi', desc: 'Othello board game vs AI', color: '#69f0ae' },
   { path: '/doodlejump', icon: '🦘', title: 'Doodle Jump', desc: 'Endless vertical platformer', color: '#b9f6ca' },
   { path: '/reactiontest', icon: '⚡', title: 'Reaction Time', desc: 'Test your reflexes', color: '#ffd740' },
+  { path: '/gravityguyrush', icon: '🧲', title: 'Gravity Guy Rush 2D', desc: '1-4P side-view gravity flip race', color: '#7dd3fc' },
+  { path: '/pockettanks3d', icon: '💥', title: 'Pocket Tanks 3D', desc: '3-4P turn-based artillery', color: '#ffb74d' },
+  { path: '/neontagarena', icon: '👑', title: 'Neon Tag Arena', desc: '3-4P crown tag battle', color: '#4dd0e1' },
+  { path: '/crystalcometclash', icon: '💎', title: 'Crystal Comet Clash', desc: '3-4P crystal collection brawl', color: '#f48fb1' },
+  { path: '/bombrelay3d', icon: '💣', title: 'Bomb Relay 3D', desc: '3-4P hot-potato bomb relay', color: '#ff8a65' },
+  { path: '/zonecontrol3d', icon: '⭕', title: 'Zone Control 3D', desc: '3-4P moving capture zone', color: '#80cbc4' },
+  { path: '/meteormayhem3d', icon: '☄️', title: 'Meteor Mayhem 3D', desc: '3-4P survival storm', color: '#b39ddb' },
+  { path: '/quaddashcircuit', icon: '🏁', title: 'Quad Dash Circuit', desc: '3-4P checkpoint race', color: '#a5d6a7' },
+  { path: '/laserlootarena', icon: '🔋', title: 'Laser Loot Arena', desc: '3-4P core loot arena', color: '#90caf9' },
+  { path: '/crownrush3d', icon: '🛡️', title: 'Crown Rush 3D', desc: '3-4P high-speed tag', color: '#ef9a9a' },
+  { path: '/orbharvest3d', icon: '🟢', title: 'Orb Harvest 3D', desc: '3-4P orb farming duel', color: '#81c784' },
+  { path: '/hoverbump3d', icon: '🚧', title: 'Hover Bump 3D', desc: '3-4P bump-and-hold arena', color: '#ffab91' },
+  { path: '/pulsepit3d', icon: '⚙️', title: 'Pulse Pit 3D', desc: '3-4P pulse bomb chaos', color: '#ce93d8' },
+  { path: '/turbototem3d', icon: '🗿', title: 'Turbo Totem 3D', desc: '3-4P totem checkpoint sprint', color: '#ffe082' },
+  { path: '/vaultraid3d', icon: '🏦', title: 'Vault Raid 3D', desc: '3-4P high-value orb raid', color: '#80deea' },
 ];
 
 export default function MainMenu() {

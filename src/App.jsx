@@ -34,6 +34,21 @@ const TowerOfHanoi = lazy(() => import('./pages/TowerOfHanoi'));
 const Reversi = lazy(() => import('./pages/Reversi'));
 const DoodleJump = lazy(() => import('./pages/DoodleJump'));
 const ReactionTest = lazy(() => import('./pages/ReactionTest'));
+const GravityGuyRush = lazy(() => import('./pages/GravityGuyRush'));
+const PocketTanks3D = lazy(() => import('./pages/PocketTanks3D'));
+const NeonTagArena = lazy(() => import('./pages/NeonTagArena'));
+const CrystalCometClash = lazy(() => import('./pages/CrystalCometClash'));
+const BombRelay3D = lazy(() => import('./pages/BombRelay3D'));
+const ZoneControl3D = lazy(() => import('./pages/ZoneControl3D'));
+const MeteorMayhem3D = lazy(() => import('./pages/MeteorMayhem3D'));
+const QuadDashCircuit = lazy(() => import('./pages/QuadDashCircuit'));
+const LaserLootArena = lazy(() => import('./pages/LaserLootArena'));
+const CrownRush3D = lazy(() => import('./pages/CrownRush3D'));
+const OrbHarvest3D = lazy(() => import('./pages/OrbHarvest3D'));
+const HoverBump3D = lazy(() => import('./pages/HoverBump3D'));
+const PulsePit3D = lazy(() => import('./pages/PulsePit3D'));
+const TurboTotem3D = lazy(() => import('./pages/TurboTotem3D'));
+const VaultRaid3D = lazy(() => import('./pages/VaultRaid3D'));
 
 function Loader() {
   return (
@@ -80,6 +95,21 @@ export default function App() {
         <Route path="/reversi" element={<Reversi />} />
         <Route path="/doodlejump" element={<DoodleJump />} />
         <Route path="/reactiontest" element={<ReactionTest />} />
+        <Route path="/gravityguyrush" element={<GravityGuyRush />} />
+        <Route path="/pockettanks3d" element={<PocketTanks3D />} />
+        <Route path="/neontagarena" element={<NeonTagArena />} />
+        <Route path="/crystalcometclash" element={<CrystalCometClash />} />
+        <Route path="/bombrelay3d" element={<BombRelay3D />} />
+        <Route path="/zonecontrol3d" element={<ZoneControl3D />} />
+        <Route path="/meteormayhem3d" element={<MeteorMayhem3D />} />
+        <Route path="/quaddashcircuit" element={<QuadDashCircuit />} />
+        <Route path="/laserlootarena" element={<LaserLootArena />} />
+        <Route path="/crownrush3d" element={<CrownRush3D />} />
+        <Route path="/orbharvest3d" element={<OrbHarvest3D />} />
+        <Route path="/hoverbump3d" element={<HoverBump3D />} />
+        <Route path="/pulsepit3d" element={<PulsePit3D />} />
+        <Route path="/turbototem3d" element={<TurboTotem3D />} />
+        <Route path="/vaultraid3d" element={<VaultRaid3D />} />
       </Routes>
     </Suspense>
   );
