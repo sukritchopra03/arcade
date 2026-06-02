@@ -1,1 +1,0 @@
-import{j as t}from"./index-yfiGI9JC.js";import{P as r}from"./PartyArenaGame-BQbL_Wjy.js";import"./three.module-DziJSYdw.js";import"./BackButton-rFMpzlHM.js";/* empty css                      */function a(){return t.jsx(r,{gameId:"pulsepit3d"})}export{a as default};

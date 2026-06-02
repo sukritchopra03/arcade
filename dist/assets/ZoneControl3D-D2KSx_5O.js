@@ -1,0 +1,1 @@
+import{j as o}from"./index-NaqsMi9Q.js";import{P as r}from"./PartyArenaGame-Cj2ZQtGq.js";import"./three.module-B8XhekDq.js";import"./BackButton-CQpoHbht.js";/* empty css                      */function i(){return o.jsx(r,{gameId:"zonecontrol3d"})}export{i as default};

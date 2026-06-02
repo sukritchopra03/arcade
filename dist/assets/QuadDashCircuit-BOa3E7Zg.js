@@ -1,0 +1,1 @@
+import{j as r}from"./index-NaqsMi9Q.js";import{P as t}from"./PartyArenaGame-Cj2ZQtGq.js";import"./three.module-B8XhekDq.js";import"./BackButton-CQpoHbht.js";/* empty css                      */function u(){return r.jsx(t,{gameId:"quaddashcircuit"})}export{u as default};
