@@ -1,1 +1,0 @@
-import{j as r}from"./index-DOVoWZka.js";import{P as t}from"./PartyArenaGame-DsqDxCJb.js";import"./three.module-Ck8estzQ.js";import"./BackButton-wX0NXPIz.js";/* empty css                      */function i(){return r.jsx(t,{gameId:"orbharvest3d"})}export{i as default};

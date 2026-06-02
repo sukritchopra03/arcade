@@ -1,1 +1,0 @@
-import{j as r}from"./index-DOVoWZka.js";import{P as m}from"./PartyArenaGame-DsqDxCJb.js";import"./three.module-Ck8estzQ.js";import"./BackButton-wX0NXPIz.js";/* empty css                      */function p(){return r.jsx(m,{gameId:"meteormayhem3d"})}export{p as default};
