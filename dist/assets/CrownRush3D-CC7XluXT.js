@@ -1,0 +1,1 @@
+import{j as r}from"./index-DOVoWZka.js";import{P as o}from"./PartyArenaGame-DsqDxCJb.js";import"./three.module-Ck8estzQ.js";import"./BackButton-wX0NXPIz.js";/* empty css                      */function i(){return r.jsx(o,{gameId:"crownrush3d"})}export{i as default};

@@ -49,6 +49,8 @@ const HoverBump3D = lazy(() => import('./pages/HoverBump3D'));
 const PulsePit3D = lazy(() => import('./pages/PulsePit3D'));
 const TurboTotem3D = lazy(() => import('./pages/TurboTotem3D'));
 const VaultRaid3D = lazy(() => import('./pages/VaultRaid3D'));
+const Badminton = lazy(() => import('./pages/Badminton'));
+const SoccerHeads = lazy(() => import('./pages/SoccerHeads'));
 
 function Loader() {
   return (
@@ -110,6 +112,8 @@ export default function App() {
         <Route path="/pulsepit3d" element={<PulsePit3D />} />
         <Route path="/turbototem3d" element={<TurboTotem3D />} />
         <Route path="/vaultraid3d" element={<VaultRaid3D />} />
+        <Route path="/badminton" element={<Badminton />} />
+        <Route path="/soccerheads" element={<SoccerHeads />} />
       </Routes>
     </Suspense>
   );

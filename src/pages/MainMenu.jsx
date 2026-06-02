@@ -1,5 +1,7 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import './MainMenu.css';
 
 const games = [
@@ -49,13 +51,51 @@ const games = [
   { path: '/pulsepit3d', icon: '⚙️', title: 'Pulse Pit 3D', desc: '3-4P pulse bomb chaos', color: '#ce93d8' },
   { path: '/turbototem3d', icon: '🗿', title: 'Turbo Totem 3D', desc: '3-4P totem checkpoint sprint', color: '#ffe082' },
   { path: '/vaultraid3d', icon: '🏦', title: 'Vault Raid 3D', desc: '3-4P high-value orb raid', color: '#80deea' },
+  { path: '/badminton', icon: '🏸', title: 'Badminton', desc: '1v1 Stickman local multiplayer', color: '#87CEEB' },
+  { path: '/soccerheads', icon: '⚽', title: 'Soccer Heads', desc: '1v1 physics with superpowers', color: '#ff5252' }
 ];
+
+const FuturisticCarouselContainer = ({ children }) => {
+  return (
+    <div className="relative w-full max-w-6xl mx-auto my-8">
+      <motion.div
+        className="absolute inset-0 bg-gradient-to-r from-blue-800 to-red-800 rounded-3xl opacity-50"
+        animate={{
+          scale: [1.05, 1.0, 1.05],
+          opacity: [0.3, 0.5, 0.3],
+        }}
+        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <div className="relative rounded-3xl overflow-hidden border-4 border-blue-200 bg-gray-900 bg-opacity-70 p-6 backdrop-blur-sm">
+        <motion.div
+          className="absolute inset-0 bg-gradient-to-r from-red-400 to-blue-500 opacity-20 pointer-events-none"
+          animate={{ x: ["-100%", "100%"] }}
+          transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
+        />
+        <div className="relative z-10">
+          {children}
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default function MainMenu() {
   const navigate = useNavigate();
   const canvasRef = useRef(null);
 
+  // Pagination for Carousel
+  const itemsPerPage = 8;
+  const totalPages = Math.ceil(games.length / itemsPerPage);
+  const [page, setPage] = useState(0);
+
+  const nextPage = () => setPage(p => (p + 1) % totalPages);
+  const prevPage = () => setPage(p => (p - 1 + totalPages) % totalPages);
+
+  const displayedGames = games.slice(page * itemsPerPage, (page + 1) * itemsPerPage);
+
   useEffect(() => {
+    // Keep the particle background
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
@@ -96,7 +136,6 @@ export default function MainMenu() {
         ctx.fill();
       }
 
-      // draw connecting lines for nearby particles
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
           const dx = particles[i].x - particles[j].x;
@@ -125,25 +164,66 @@ export default function MainMenu() {
   return (
     <div className="menu-root">
       <canvas ref={canvasRef} className="menu-particles" />
-      <div className="menu-content">
-        <h1 className="menu-title">
+      
+      <div className="menu-content flex flex-col items-center justify-center w-full min-h-screen z-10 p-4">
+        <h1 className="menu-title mb-4">
           <span className="title-glow">ARCADE</span>
         </h1>
-        <p className="menu-subtitle">Choose a game to play</p>
-        <div className="menu-cards">
-          {games.map(g => (
-            <button
-              key={g.path}
-              className="menu-card"
-              style={{ '--card-color': g.color }}
-              onClick={() => navigate(g.path)}
-            >
-              <span className="card-icon">{g.icon}</span>
-              <h3>{g.title}</h3>
-              <p>{g.desc}</p>
+        <p className="menu-subtitle text-gray-300 mb-8 text-xl">Choose a game to play</p>
+        
+        <FuturisticCarouselContainer>
+          <div className="flex items-center justify-between w-full">
+            <button onClick={prevPage} className="p-3 text-white bg-white/10 hover:bg-white/30 rounded-full backdrop-blur-md transition-all shadow-lg z-20">
+              <ChevronLeft size={32} />
             </button>
-          ))}
-        </div>
+            
+            <div className="flex-grow overflow-hidden px-4">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={page}
+                  initial={{ opacity: 0, x: 50 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -50 }}
+                  transition={{ duration: 0.3 }}
+                  className="grid grid-cols-2 md:grid-cols-4 gap-6 w-full"
+                >
+                  {displayedGames.map(g => (
+                    <motion.button
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      key={g.path}
+                      className="menu-card relative bg-white/5 border border-white/10 rounded-2xl p-6 flex flex-col items-center text-center overflow-hidden group shadow-xl hover:shadow-2xl transition-all"
+                      style={{ '--card-color': g.color }}
+                      onClick={() => navigate(g.path)}
+                    >
+                      <div 
+                        className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-300" 
+                        style={{ backgroundColor: g.color }} 
+                      />
+                      <span className="card-icon text-5xl mb-3 block transform group-hover:scale-110 transition-transform duration-300">{g.icon}</span>
+                      <h3 className="text-white font-bold text-lg mb-2 relative z-10">{g.title}</h3>
+                      <p className="text-gray-300 text-sm relative z-10">{g.desc}</p>
+                    </motion.button>
+                  ))}
+                </motion.div>
+              </AnimatePresence>
+            </div>
+            
+            <button onClick={nextPage} className="p-3 text-white bg-white/10 hover:bg-white/30 rounded-full backdrop-blur-md transition-all shadow-lg z-20">
+              <ChevronRight size={32} />
+            </button>
+          </div>
+          
+          <div className="flex justify-center mt-6 space-x-2">
+            {Array.from({ length: totalPages }).map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setPage(i)}
+                className={`w-3 h-3 rounded-full transition-all ${i === page ? 'bg-cyan-400 scale-125' : 'bg-gray-500 hover:bg-gray-400'}`}
+              />
+            ))}
+          </div>
+        </FuturisticCarouselContainer>
       </div>
     </div>
   );
