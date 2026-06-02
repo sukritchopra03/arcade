@@ -1,1 +1,0 @@
-import{j as r}from"./index-HKMTmAqe.js";import{P as t}from"./PartyArenaGame-CzZk_bXM.js";import"./three.module-B8XhekDq.js";import"./BackButton-HyP-q8zK.js";/* empty css                      */function p(){return r.jsx(t,{gameId:"vaultraid3d"})}export{p as default};

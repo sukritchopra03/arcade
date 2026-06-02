@@ -1,1 +1,0 @@
-import{j as r}from"./index-HKMTmAqe.js";import{P as a}from"./PartyArenaGame-CzZk_bXM.js";import"./three.module-B8XhekDq.js";import"./BackButton-HyP-q8zK.js";/* empty css                      */function i(){return r.jsx(a,{gameId:"neontagarena"})}export{i as default};

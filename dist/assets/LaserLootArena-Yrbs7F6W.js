@@ -1,0 +1,1 @@
+import{j as r}from"./index-BILVeoml.js";import{P as o}from"./PartyArenaGame-DN6axXLY.js";import"./three.module-B8XhekDq.js";import"./BackButton-CMxzwgEl.js";/* empty css                      */function i(){return r.jsx(o,{gameId:"laserlootarena"})}export{i as default};
