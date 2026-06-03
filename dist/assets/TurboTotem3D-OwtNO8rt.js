@@ -1,0 +1,1 @@
+import{j as t}from"./index-DHV30zU5.js";import{P as r}from"./PartyArenaGame-C3rmf38E.js";import"./three.module-2zjhy1gh.js";import"./BackButton-DoUdjFEz.js";/* empty css                      */function p(){return t.jsx(r,{gameId:"turbototem3d"})}export{p as default};

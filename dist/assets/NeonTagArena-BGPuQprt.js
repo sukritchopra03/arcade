@@ -1,1 +1,0 @@
-import{j as r}from"./index-BILVeoml.js";import{P as a}from"./PartyArenaGame-DN6axXLY.js";import"./three.module-B8XhekDq.js";import"./BackButton-CMxzwgEl.js";/* empty css                      */function i(){return r.jsx(a,{gameId:"neontagarena"})}export{i as default};

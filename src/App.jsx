@@ -52,6 +52,8 @@ const VaultRaid3D = lazy(() => import('./pages/VaultRaid3D'));
 const Badminton = lazy(() => import('./pages/Badminton'));
 const SoccerHeads = lazy(() => import('./pages/SoccerHeads'));
 const Racing4P = lazy(() => import('./pages/Racing4P'));
+const FpsShooter3D = lazy(() => import('./pages/FpsShooter3D'));
+
 
 function Loader() {
   return (
@@ -116,6 +118,7 @@ export default function App() {
         <Route path="/badminton" element={<Badminton />} />
         <Route path="/soccerheads" element={<SoccerHeads />} />
         <Route path="/racing4p" element={<Racing4P />} />
+        <Route path="/fps3d" element={<FpsShooter3D />} />
       </Routes>
     </Suspense>
   );
