@@ -1,1 +1,0 @@
-import{j as r}from"./index-DHV30zU5.js";import{P as m}from"./PartyArenaGame-C3rmf38E.js";import"./three.module-2zjhy1gh.js";import"./BackButton-DoUdjFEz.js";/* empty css                      */function i(){return r.jsx(m,{gameId:"hoverbump3d"})}export{i as default};

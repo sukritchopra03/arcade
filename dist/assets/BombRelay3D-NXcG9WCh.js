@@ -1,1 +1,0 @@
-import{j as r}from"./index-DHV30zU5.js";import{P as m}from"./PartyArenaGame-C3rmf38E.js";import"./three.module-2zjhy1gh.js";import"./BackButton-DoUdjFEz.js";/* empty css                      */function p(){return r.jsx(m,{gameId:"bombrelay3d"})}export{p as default};

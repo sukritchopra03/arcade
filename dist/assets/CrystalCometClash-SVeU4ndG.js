@@ -1,1 +1,0 @@
-import{j as t}from"./index-DHV30zU5.js";import{P as r}from"./PartyArenaGame-C3rmf38E.js";import"./three.module-2zjhy1gh.js";import"./BackButton-DoUdjFEz.js";/* empty css                      */function i(){return t.jsx(r,{gameId:"crystalcometclash"})}export{i as default};
