@@ -1,1 +1,0 @@
-import{j as s}from"./index-jRns1Xr3.js";import{B as a}from"./BackButton-E4vQLh-V.js";function l(){return s.jsxs("div",{className:"sal-root",children:[s.jsx(a,{}),s.jsx("div",{className:"sal-iframe-container",children:s.jsx("iframe",{src:"/snakes-ladders/index.html",title:"Snakes and Ladders",className:"sal-iframe",allow:"fullscreen"})})]})}export{l as default};

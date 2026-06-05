@@ -1342,6 +1342,10 @@ export default function Racing() {
               k.checkpointPassed = false;
               k.lap += 1;
             }
+          } else if (k.modelGroup) {
+            // Guest clients or pre-match: update visual models to match synced/initial values
+            k.modelGroup.position.copy(k.pos);
+            k.modelGroup.rotation.y = k.angle;
           }
         }
 

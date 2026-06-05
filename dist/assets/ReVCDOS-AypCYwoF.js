@@ -1,0 +1,1 @@
+import{j as e}from"./index-OEXfInN6.js";import{B as r}from"./BackButton-DcA2y_Gc.js";function i(){return e.jsxs("div",{className:"revc-root",children:[e.jsx(r,{}),e.jsx("div",{className:"revc-iframe-container",children:e.jsx("iframe",{src:"/revcdos/index.html",title:"GTA Vice City HTML5",className:"revc-iframe",allow:"fullscreen; keyboard; gamepad"})})]})}export{i as default};

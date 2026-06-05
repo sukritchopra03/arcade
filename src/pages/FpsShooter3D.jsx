@@ -2061,6 +2061,7 @@ export default function FpsShooter3D() {
         oppMesh.visible = st.connected && st.gameMode !== 'zombies';
         if (st.connected) {
           oppMesh.position.lerp(st.oppTargetPos, dt * 10);
+          st.oppPos.copy(oppMesh.position);
           oppMesh.rotation.y = THREE.MathUtils.lerp(oppMesh.rotation.y, st.oppYaw, dt * 10);
           if (oppGun) oppGun.rotation.x = THREE.MathUtils.lerp(oppGun.rotation.x, st.oppPitch, dt * 10);
         }
@@ -2295,8 +2296,9 @@ export default function FpsShooter3D() {
             }
           }
 
-          if (target) {
-            const targetPos = target.clone();
+          const targetSource = target?.isVector3 ? target : target?.pos;
+          if (targetSource?.isVector3) {
+            const targetPos = targetSource.clone();
             targetPos.y = 0.8;
             
             const dir = targetPos.clone().sub(bot.pos);
